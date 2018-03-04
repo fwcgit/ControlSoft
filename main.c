@@ -3,12 +3,36 @@
 #include"delay.h"
 #include"led.h"
 #include"usart.h"
+#include "LCD_1602.h"
+#include "adc.h"
+#include<math.h>
 
 char *tips = "system to start up \r\n";
+char *strTable = "0123456789";
 
 void EXTI_PC1_CONFIG(void);
 void NVIC_Configuration(void);
+extern __IO uint16_t ADCConvertVale; 
+u16 ADC_ConvertedValueLocal; 
+void initToStr2(u16 temp);
+void initToStr2(u16 temp)
+{
+	
+	u16 w = temp /10000;
+	u16 q = temp /1000%10;
+	u16 b = temp /100%10;
+	u16 s = temp %100/10;
+	u16 g = temp %10;
 
+	display_LCD(0x85,*(strTable+w));
+	display_LCD(0x86,*(strTable+q));
+	display_LCD(0x87,*(strTable+b));
+	display_LCD(0x88,*(strTable+s));
+	display_LCD(0x89,*(strTable+g));
+	
+	display_LCD(0x89,*(strTable+g));
+	
+}
 int main(void)
 {
 	
@@ -20,14 +44,24 @@ int main(void)
 	
 	USART1_CONFIG();
 	
+	Config_GPIO_LCD();
+	
+	init_LCD();
+	
+	Start_Convet_ADC();
+	
 	while(1)
 	{
+
+
 			GPIOD_Pin_2(OFF);
 			delay_ms(500);
 			GPIOD_Pin_2(ON);
 			delay_ms(500);
-		
-			printf("%s",tips);
+			display_value();
+		ADC_ConvertedValueLocal = ADC1->DR;
+			printf("%d\r\n",ADC_ConvertedValueLocal);
+			initToStr2(ADC_ConvertedValueLocal);
 	}
 }
 
@@ -99,3 +133,4 @@ void EXTI1_IRQHandler(void)
 	}
 	
 }
+
