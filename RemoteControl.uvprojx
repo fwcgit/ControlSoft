@@ -410,6 +410,11 @@
               <FileType>1</FileType>
               <FilePath>.\adc.c</FilePath>
             </File>
+            <File>
+              <FileName>oled_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\oled_i2c.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -440,6 +445,11 @@
               <FileType>5</FileType>
               <FilePath>.\adc.h</FilePath>
             </File>
+            <File>
+              <FileName>oled_i2c.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\oled_i2c.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -455,8 +465,8 @@
   <RTE>
     <apis/>
     <components>
-      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.0.2" condition="ARMv6_7_8-M Device">
-        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.2.0"/>
+      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.0.1" condition="ARMv6_7_8-M Device">
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.0.1"/>
         <targetInfos>
           <targetInfo name="control"/>
         </targetInfos>
@@ -492,6 +502,12 @@
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="GPIO" Cvendor="Keil" Cversion="3.5.0" condition="STM32F1xx STDPERIPH RCC">
+        <package name="STM32F1xx_DFP" schemaVersion="1.4.0" url="http://www.keil.com/pack/" vendor="Keil" version="2.2.0"/>
+        <targetInfos>
+          <targetInfo name="control"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="I2C" Cvendor="Keil" Cversion="3.5.0" condition="STM32F1xx STDPERIPH RCC">
         <package name="STM32F1xx_DFP" schemaVersion="1.4.0" url="http://www.keil.com/pack/" vendor="Keil" version="2.2.0"/>
         <targetInfos>
           <targetInfo name="control"/>
